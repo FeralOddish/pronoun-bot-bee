@@ -17,5 +17,4 @@ bot.on('message', msg => {
     var role= member.guild.roles.cache.find(role => role.name === rolename);
     member.roles.add(role);
   }
-  }
 });
