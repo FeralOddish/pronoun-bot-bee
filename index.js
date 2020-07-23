@@ -10,16 +10,12 @@ bot.on('ready', () => {
 });
 
 bot.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('pong');
-    msg.channel.send('pong');
-
-  } else if (msg.content.startsWith('!kick')) {
-    if (msg.mentions.users.size) {
-      const taggedUser = msg.mentions.users.first();
-      msg.channel.send(`You wanted to kick: ${taggedUser.username}`);
-    } else {
-      msg.reply('Please tag a valid user!');
-    }
+  if (msg.content.search("!iam")>=0) {
+    message = msg.content;
+    mt = message.match(/!iam ([\w/]+)/);
+    rolename=mt[1];
+    var role= member.guild.roles.cache.find(role => role.name === rolename);
+    member.roles.add(role);
+  }
   }
 });
