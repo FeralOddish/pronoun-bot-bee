@@ -9,7 +9,8 @@ bot.on('ready', () => {
   console.info(`Logged in as ${bot.user.tag}!`);
 });
 
-permissibleRoles = ["they/them"]
+permissibleRoles = ["they/them", "she/her", "he/him", "just ask"] 
+
 
 function isPermissibleRole(roleName) {
   var found=false
