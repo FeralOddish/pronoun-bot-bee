@@ -26,18 +26,24 @@ function isPermissibleRole(roleName) {
   //   i++;
   // }
   // return found
-  return permissibleRoles.some(thisRole => thisRole.equals(roleName));
+  return permissibleRoles.some(thisRole => thisRole === roleName);
 }
 
 bot.on('message', msg => {
   if (msg.content.search("!iam")>=0) {
     message = msg.content;
-    mt = message.match(/!iam ([\w/]+)/);
+    mt = message.match(/!iam ([\w/ ]+)/);
     roleName=mt[1];
     if (permissibleRoles.some(thisRole => (thisRole===roleName))) {
+      var member_roles = msg.member.roles.cache;
+      member_roles.forEach(function (role) {
+        if (isPermissibleRole(role.name)) {
+          msg.member.roles.remove(role);
+        } 
+      });
       var roles = msg.guild.roles;
-      var role = msg.guild.roles.find(role => role.name === roleName);
-      if (role) msg.member.addRole(role);
+      var role_to_add = msg.guild.roles.cache.find(role_to_add => role_to_add.name === roleName);
+      if (role_to_add) msg.member.roles.add(role_to_add);
     }
   }
 });
